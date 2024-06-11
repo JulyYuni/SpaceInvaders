@@ -39,11 +39,9 @@ O programa possui interface gráfica.
 
 O que vem com nova versão
 
-- Menu dificuldades agora ativo, mas não finalizado.
-- Agora há uma partida no jogo!
-- Temos uma joaninha como a nave do jogador.
-- E temos borboletas como inimigos que se movem pela tela.
-- A nave do jogador também pode dar tiros agora.
+- Menu dificuldades agora possui hover.
+- Botões fácil e difícil estão alinhados.
+- Espaço entre borboletas(inimigos) está maior.
 
 Tela do Jogo
 
@@ -58,10 +56,10 @@ Tela do Jogo
 
 Sobre bugs e melhoras
 
-- Atualmente os botões em dificuldade estão desalinhados e sem o hover.
+- Bug do tiro consertado.
+- Atualmente o botão médio no menu de dificuldade ainda está desalinhado. 
 - Os inimigos(Borboletas) estão andando muito rápido para facilitar os testes.
 - Tiros ainda não colidem com inimigos.
-- O jogo possui um bug quando se aperta espaço antes de mover a joaninha em partida, se o menu dificuldade já foi aberto. A bola trava saindo da joaninha e ela nem a bola se movem mais. Precisando apertar 'ESC' e iniciar a partida novamente para funcionar.
 
 Considerações finais:
 
