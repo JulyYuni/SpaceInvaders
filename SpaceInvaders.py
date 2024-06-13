@@ -26,10 +26,10 @@ tempo_atual = 0
 tempo_ultimo_tiro = 0
 
     #Inimigos
-i = 7
-j = 5
-vel_horizontal_inimigo = 10
-vel_vertical_inimigo = 50
+i = 10
+j = 6
+vel_horizontal_inimigo = 1
+vel_vertical_inimigo = 5
 
 
 # Definindo os sprites
@@ -53,7 +53,7 @@ button_dificil_hover = Sprite("assets/images/hover-buttons/botao-dificuldade3-ho
 
     # Definindo sprites de objetos
 nave = Sprite('assets/images/objects/nave.png', 1)
-tiro = Sprite('assets/images/objects/tiro.png')
+tiro = Sprite('assets/images/objects/tiro.png', 1)
 matriz_inimigos = [[Sprite('assets/images/objects/inimigo.png', 1) for _ in range(j)] for _ in range(i)]   #Inicializa a matriz de inimigos
 
     # Definindo backgrounds
@@ -85,6 +85,7 @@ def menu_principal():
     global clickou
     velocidade_nave = 500
     velocidade_tiro = 500
+
     #Atualiza a posição dos botões
     posicoes()
 
@@ -98,6 +99,7 @@ def menu_principal():
         buttons_hover = [botao_play_hover, botao_dificuldade_hover, botao_ranking_hover, botao_sair_hover]
 
         clickou, click_left = click_hover(buttons, buttons_hover)
+        
         #se o botao já foi clickado, mas o usuário soltou o click
         if click_left == False and clickou > 0:
             #Botão play clickado, abre o jogo
@@ -173,11 +175,11 @@ def posicoes():
     global desenhou_inimigos
 
     botoes_x = janela.width/2 - (botao_play.width/2)
-    num_magico = (janela.height - botao_play.height *4) /5
-    botao_play_y = (num_magico)
-    botao_dificuldade_y = (botao_play.height) + (num_magico)*2
-    botao_ranking_y = (botao_play.height)*2 + (num_magico)  *3
-    botao_sair_y = (botao_play.height)*3 + (num_magico)     *4
+    botoes_y_gap = (janela.height - botao_play.height *4) /5
+    botao_play_y = (botoes_y_gap)
+    botao_dificuldade_y = (botao_play.height) + (botoes_y_gap)*2
+    botao_ranking_y = (botao_play.height)*2 + (botoes_y_gap)  *3
+    botao_sair_y = (botao_play.height)*3 + (botoes_y_gap)     *4
     botao_medio_y = (button_dificil.y - button_facil.y) /2
 
     #Botões menu principal
@@ -197,7 +199,7 @@ def posicoes():
     button_medio.set_position(botoes_x  , botao_medio_y)
     button_dificil.set_position(botoes_x , botao_sair_y)
 
-    #Botões menu dificuldades
+    #Botões hover menu dificuldades
     button_facil_hover.set_position(botoes_x , botao_play_y)
     button_medio_hover.set_position(botoes_x  , botao_medio_y)
     button_dificil_hover.set_position(botoes_x , botao_sair_y)
@@ -217,7 +219,7 @@ def posicoes():
 
 
 #4 Função que recebe as entradas do teclado
-def inputs(velocidade_nave):
+def inputs(velocidade_nave):  #tirar esse velocidade_nave do parametro
     global gamestate
 
     #Move nave para esquerda
@@ -247,7 +249,7 @@ def input_space(tempo_transcorrido, tempo_ultimo_tiro, tiros, tempo_atual):
         tempo_atual = tempo_transcorrido
 
         if tempo_atual - tempo_ultimo_tiro > 0.5:  # Permitir um intervalo de 0.5 segundos entre os tiros
-            novo_tiro = Sprite('assets/images/objects/tiro.png')
+            novo_tiro = Sprite('assets/images/objects/tiro.png', 1)
             novo_tiro.set_position(nave.x + 42, nave.y - 10)
             tiros.append(novo_tiro)
             tempo_ultimo_tiro = tempo_atual  # Atualiza o tempo do último tiro
@@ -296,7 +298,6 @@ def click_hover(buttons, buttons_hover):
 #6 Play
 def play(velocidade_nave, velocidade_tiro):
     global gamestate
-    direcao_inimigos = 1
 
     #Tiros
     tiros = []
@@ -307,6 +308,7 @@ def play(velocidade_nave, velocidade_tiro):
     # Inicializa a matriz de inimigos
     global matriz_inimigos
     global desenhou_inimigos
+    direcao_inimigos = 1
     matriz_inimigos = [[Sprite('assets/images/objects/inimigo.png', 1) for _ in range(j)] for _ in range(i)]      # Inicializa a matriz de inimigos
     desenhou_inimigos = False
     
@@ -325,7 +327,7 @@ def play(velocidade_nave, velocidade_tiro):
         gamestate = inputs(velocidade_nave)
         if gamestate == 0:
             return gamestate
-        #print(gamestate)
+
         #Solta tiro
         tempo_transcorrido, tempo_ultimo_tiro, tiros, tempo_atual = input_space(tempo_transcorrido, tempo_ultimo_tiro, tiros, tempo_atual)
         
@@ -359,11 +361,12 @@ def menu_dificuldade():
 
     while gamestate == 2:
         
-        #Colocando botões em hover em listas
+        #Colocando botões em listas
         buttons = [button_facil, button_medio, button_dificil]
         buttons_hover = [button_facil_hover, button_medio_hover, button_dificil_hover]
 
         clickou, click_left = click_hover(buttons, buttons_hover)
+
         #se o botao já foi clickado, mas o usuário soltou o click
         if click_left == False and clickou > 0:
 
