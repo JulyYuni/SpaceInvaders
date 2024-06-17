@@ -17,7 +17,7 @@ def menu_principal(gamestate, inicializou_gamestate, iniciando_novo_jogo):
             #Gera o cenário
             posicoes()
             gerando_cenario(gamestate)
-            inicializou_gamestate = True                # Confirma que cenário foi gerado
+            inicializou_gamestate = True        # Confirma que cenário foi gerado
             clickou = 0                         # Nenhum botão foi clickado ainda
 
             #Se estiver iniciando um novo jogo
