@@ -1,7 +1,7 @@
 '''''''''''IMPORTS'''''''''
 from PPlay.window import *
 from PPlay.sprite import *
-
+import random
 
 
 '''''''''''VARIÁVEIS'''''''''
@@ -54,7 +54,16 @@ button_dificil_hover = Sprite("assets/images/hover-buttons/botao-dificuldade3-ho
     #Definindo sprites de objetos
 nave = Sprite('assets/images/objects/nave.png', 1)
 tiro = Sprite('assets/images/objects/tiro.png', 1)
-matriz_inimigos = [[Sprite('assets/images/objects/inimigo.png', 1) for _ in range(j)] for _ in range(i)]   #Inicializa a matriz de inimigos
+
+tiro_inimigo_1 = Sprite('assets/images/objects/tiro.png', 1)
+tiro_inimigo_2 = Sprite('assets/images/objects/tiro.png', 1)
+tiro_inimigo_3 = Sprite('assets/images/objects/tiro.png', 1)
+tiros_inimigos = [tiro_inimigo_1, tiro_inimigo_2, tiro_inimigo_3]
+
+caminho_inimigo_1 = 'assets/images/objects/inimigo1.png'
+caminho_inimigo_2 = 'assets/images/objects/inimigo2.png'
+caminho_inimigo_3 = 'assets/images/objects/inimigo3.png'
+
 
     #Definindo backgrounds
 background = Sprite("assets/images/backgrounds/plano-de-fundo.jpg", 1)
