@@ -2,7 +2,6 @@
 from variables import *
 
 
-
 '''''''''''FUNÇÕES'''''''''
 
 #1 Função que gera o cenário
@@ -23,8 +22,6 @@ def gerando_cenario(gamestate):
     if gamestate == 1:
         background.draw()
         nave.draw()
-        inimigos_draw()
-    
     
     #Menu dificuldades
     if gamestate == 2:
@@ -33,32 +30,17 @@ def gerando_cenario(gamestate):
         button_medio.draw()
         button_dificil.draw()
 
-
-
-#2 Desenhando inimigos na tela          
-def inimigos_draw():
-
-    # X percorre cada linha e Y percorre cada elemento da matriz e desenha os inimigos
-    for x in range(i):
-        for y in range(j):
-            if matriz_inimigos[x][y] != None:
-
-                #Desenha inimigos
-                matriz_inimigos[x][y].draw()
-
-
-
-#3 Definição das posições de início de partida
+#2 Definição das posições de início de partida
 def posicoes():
-    global desenhou_inimigos
 
+    #Variáveis auxiliares para posicionamento dos botões
     botoes_x = janela.width/2 - (botao_play.width/2)
     botoes_y_gap = (janela.height - botao_play.height *4) /5
     botao_play_y = (botoes_y_gap)
     botao_dificuldade_y = (botao_play.height) + (botoes_y_gap)*2
     botao_ranking_y = (botao_play.height)*2 + (botoes_y_gap)  *3
     botao_sair_y = (botao_play.height)*3 + (botoes_y_gap)     *4
-    botao_medio_y = (button_dificil.y - button_facil.y) /2
+    botao_medio_y = (button_dificil.y - button_facil.y + button_facil.height/2) /2
 
     #Botões menu principal
     botao_play.set_position(botoes_x , botao_play_y)
@@ -86,18 +68,8 @@ def posicoes():
     nave.set_position(janela.width / 2 - 50, resolucao_altura_tela - nave.height)
     tiro.set_position(nave.x +42, nave.y - 10)
 
-    #Setando a posição inicial caso seja a primeira vez
-    if not desenhou_inimigos:
-        
-        # X percorre cada linha e Y percorre cada elemento da matriz e desenha os inimigos
-        for x in range(i):
-            for y in range(j):
-                matriz_inimigos[x][y].set_position(20 + x * (matriz_inimigos[x][y].width + matriz_inimigos[x][y].width/2), 20 + y * (matriz_inimigos[x][y].height + matriz_inimigos[x][y].width/2))
-        desenhou_inimigos = True
-    
 
-
-#4 Função que recebe as entradas do teclado
+#3 Função que recebe as entradas do teclado
 def inputs(gamestate, inicializou_gamestate, velocidade_nave):  #tirar esse velocidade_nave do parametro
 
     #Move nave para esquerda
@@ -115,27 +87,26 @@ def inputs(gamestate, inicializou_gamestate, velocidade_nave):  #tirar esse velo
         gamestate = 0
         inicializou_gamestate = False
 
+
     return gamestate, inicializou_gamestate
 
-#6 Click e hover nos botoes
+
+
+#4 Click e hover nos botoes
 def click_hover(clickou, buttons, buttons_hover):
 
     is_hover = []
 
-    #posicoes()
     #Verificações do hover nos botoes
     for button in buttons:
         is_hover.append(mouse_object.is_over_object(button))
 
     #Verificacao do click no botao esquerdo do mouse
     click_left = mouse_object.is_button_pressed(1)
-
-    #Para cada botão em tela, verificar
-    for index, hover in enumerate(is_hover): 
-        #Se o mouse estiver em cima do botão
-        if hover == True:
-            #Desenha e posiciona botão hover
-            posicoes()
+    
+    for index, hover in enumerate(is_hover): # Para cada botão em tela, verificar
+        if hover == True:                    # Se o mouse estiver em cima do botão
+            posicoes()                       # Posiciona e desenha o botão hover
             buttons_hover[index].draw()        
 
             #Se clickou guarde essa informação
